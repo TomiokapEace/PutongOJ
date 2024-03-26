@@ -62,11 +62,13 @@ async function judgeSetup () {
 
   const judgersDir = resolve(__dirname, 'services')
 
-  await fse.emptyDir(resolve(judgersDir, 'Judger'))
+  const isJudgerDownloaded = await fse.pathExists(resolve(judgersDir, 'Judger', '.git'));
 
-  // 下载最新版的 judger
-  await execaCommand(`git clone https://github.com/acm309/Judger ${resolve(judgersDir, 'Judger')}`)
-  await execaCommand(`make -C ${resolve(judgersDir, 'Judger')}`)
+  if (!isJudgerDownloaded) {
+    // 进行克隆和编译步骤
+    await execaCommand(`git clone git@github.com:acm309/Judger.git ${resolve(judgersDir, 'Judger')}`);
+    await execaCommand(`make -C ${resolve(judgersDir, 'Judger')}`);
+  }
 
   await Promise.all([
     fse.copy(resolve(judgersDir, 'Judger', 'Judge'), resolve(judgersDir, 'node-0', 'Judge')),
@@ -101,21 +103,21 @@ async function judgeSetup () {
   return fse.outputJSON('pm2.config.json', pm2config, { spaces: 2, EOL: '\n' })
 }
 
-async function staticFilesSetUp () {
-  const res = await fetch('https://api.github.com/repos/acm309/PutongOJ-FE/releases')
-  const json = await res.json()
-  const url = json[0].assets[0].browser_download_url
-  await execaCommand(`wget ${url} -O dist.zip`)
-  await execaCommand('unzip -o dist.zip -d dist')
-  await execaCommand('cp -r dist/* public/', {
-    shell: true,
-  })
-}
+// async function staticFilesSetUp () {
+//   const res = await fetch('https://api.github.com/repos/acm309/PutongOJ-FE/releases')
+//   const json = await res.json()
+//   const url = json[0].assets[0].browser_download_url
+//   await execaCommand(`wget ${url} -O dist.zip`)
+//   await execaCommand('unzip -o dist.zip -d dist')
+//   await execaCommand('cp -r dist/* public/', {
+//     shell: true,
+//   })
+// }
 
 function main () {
   return Promise.all([
     judgeSetup(),
-    staticFilesSetUp(),
+    //staticFilesSetUp(),
   ])
 }
 

@@ -1,0 +1,50 @@
+{
+  "apps": [
+    {
+      "name": "app",
+      "script": "/home/peace/project/PutongOJ/app.js",
+      "out_file": "/home/peace/project/PutongOJ/logs/app.out.log",
+      "error_file": "/home/peace/project/PutongOJ/logs/app.err.log",
+      "log_date_format": "YYYY-MM-DD HH:mm:ss X",
+      "merge_logs": true,
+      "restart_delay": 500,
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    {
+      "name": "updater",
+      "script": "/home/peace/project/PutongOJ/services/updater.js",
+      "out_file": "/home/peace/project/PutongOJ/logs/updater.out.log",
+      "error_file": "/home/peace/project/PutongOJ/logs/updater.err.log",
+      "log_date_format": "YYYY-MM-DD HH:mm:ss X",
+      "merge_logs": true,
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    {
+      "name": "mailer",
+      "script": "/home/peace/project/PutongOJ/services/mailer.js",
+      "out_file": "/home/peace/project/PutongOJ/logs/mailer.out.log",
+      "error_file": "/home/peace/project/PutongOJ/logs/mailer.err.log",
+      "log_date_format": "YYYY-MM-DD HH:mm:ss X",
+      "merge_logs": true,
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    {
+      "name": "node-0",
+      "script": "/home/peace/project/PutongOJ/services/node-0/judger.js",
+      "out_file": "/home/peace/project/PutongOJ/logs/node-0-out.log",
+      "error_file": "/home/peace/project/PutongOJ/logs/node-0-err.log",
+      "log_date_format": "YYYY-MM-DD HH:mm:ss X",
+      "merge_logs": true,
+      "cwd": "/home/peace/project/PutongOJ/services/node-0",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  ]
+}

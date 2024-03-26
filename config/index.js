@@ -69,3 +69,7 @@ config.port = Number.parseInt(
 )
 
 module.exports = config
+
+const prod = {
+    port: 3000 // the port the application will listen on
+}

@@ -27,6 +27,7 @@ services:
     volumes:
       - $PWD/data:/app/data
       - $PWD/logs:/app/logs
+      - /path/to/Judger:/services/Judger
       # warning: volumn is not available on building period
     depends_on:
       - ptoj-redis

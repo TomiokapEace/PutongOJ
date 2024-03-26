@@ -16,7 +16,7 @@ COPY . .
 
 EXPOSE 3000
 
-RUN node manage.js
+#RUN node manage.js
 
 # pnpm fails with "ERR_PNPM_RECURSIVE_EXEC_FIRST_FAIL"
 CMD ["npx", "pm2", "start", "pm2.config.json", "--no-daemon"]

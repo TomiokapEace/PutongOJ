@@ -100,7 +100,7 @@ const prod = {
 6. 下载静态文件和启动判题端
 
 ```bash
-node manager.js
+node manage.js
 ```
 
 `pm2.config.json` 会自动生成.
